@@ -38,5 +38,5 @@ jobs:
         run: rm -rf node_modules && yarn install --frozen-lockfile
       - name: Release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CGNETWORK_PAT }}
         run: npx semantic-release

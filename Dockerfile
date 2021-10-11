@@ -6,7 +6,9 @@ COPY --chown=docker:docker . /var/www/html
 
 USER root
 
-RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && \
+RUN apt-get -y update && \
+    apt-get install python -y && \
+    curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && \
     chmod a+rx /usr/local/bin/youtube-dl
 
 USER docker

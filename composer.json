@@ -10,7 +10,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "norkunas/youtube-dl-php": "dev-master",
+        "paquettg/php-html-parser": "^3.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

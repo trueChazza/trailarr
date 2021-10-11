@@ -13,7 +13,9 @@ RUN apt-get -y update && \
 
 USER docker
 
-RUN composer install --quiet --optimize-autoloader --no-dev
+RUN composer install --quiet --optimize-autoloader --no-dev && \
+    cp -n .env.example .env && \
+    php artisan key:generate
 
 FROM node:14.15.4 as node_dependencies
 WORKDIR /var/www/html

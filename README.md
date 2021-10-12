@@ -20,11 +20,11 @@ services:
   trailarr:
     image: cgnetwork/trailarr:latest
     volumes:
-      - /trailers:/var/www/html/storage/app/videos
+      - /path/to/trailers:/var/www/html/storage/app/videos
     ports:
       - "80:80"
     environment:
-      - TMDB_API_KEY=some-tmb-api-key
+      - TMDB_API_KEY=some-tmdb-api-key
 ```
 
 ## Configuration
@@ -32,12 +32,12 @@ services:
 A `TMDB_API_KEY` environment variable with a valid api key is required:
 
 ```bash
-TMDB_API_KEY=some-tmb-api-key
+TMDB_API_KEY=some-tmdb-api-key
 ```
 
 Trailers can be accessed on the host directory mounted to the container download directory:
 ```bash
--v /path/to/trailers:/var/www/html/storage/app/videos
+/path/to/trailers:/var/www/html/storage/app/videos
 ```
 
 ## Contributing

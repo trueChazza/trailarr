@@ -19,10 +19,10 @@ version: '3'
 services:
   trailarr:
     image: cgnetwork/trailarr:latest
-    volumes:
-      - /path/to/trailers:/var/www/html/storage/app/videos
     ports:
       - "80:80"
+    volumes:
+      - /path/to/trailers:/var/www/html/storage/app/videos
     environment:
       - TMDB_API_KEY=some-tmdb-api-key
 ```

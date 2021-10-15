@@ -20,19 +20,7 @@ use YoutubeDl\YoutubeDl;
 
 Route::get('/', function () {
 
-    $items = Http::get('https://api.themoviedb.org/3/movie/upcoming?api_key=' . config('services.tmdb.api_key') . '&language=en-US&page=1');
-
-    return view('home', [
-        'title' => 'Upcoming',
-        'items' => $items->json()
-    ]);
-});
-
-Route::get('/search', function (Request $request) {
-
-    $query = $request->query('query');
-
-    $items = Http::get("https://api.themoviedb.org/3/search/multi?query=$query&api_key=" . config('services.tmdb.api_key') . '&language=en-US&page=1')->json();
+    $items = Http::get('https://api.themoviedb.org/3/trending/all/day?api_key=' . config('services.tmdb.api_key'))->json();
 
     $hasPoster = array_filter($items['results'], function($item) {
         return array_key_exists('poster_path', $item);
@@ -43,6 +31,65 @@ Route::get('/search', function (Request $request) {
     });
 
     return view('home', [
+        'items' => [
+            'results' => $hasTitle
+        ]
+    ]);
+})->name('home');
+
+Route::get('/now-playing', function () {
+
+    $items = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=' . config('services.tmdb.api_key'))->json();
+
+    $hasPoster = array_filter($items['results'], function($item) {
+        return array_key_exists('poster_path', $item);
+    });
+
+    $hasTitle = array_filter($hasPoster, function($item) {
+        return array_key_exists('title', $item);
+    });
+
+    return view('home', [
+        'items' => [
+            'results' => $hasTitle
+        ]
+    ]);
+})->name('now-playing');
+
+Route::get('/upcoming', function () {
+
+    $items = Http::get('https://api.themoviedb.org/3/movie/upcoming?api_key=' . config('services.tmdb.api_key'));
+
+    $hasPoster = array_filter($items['results'], function($item) {
+        return array_key_exists('poster_path', $item);
+    });
+
+    $hasTitle = array_filter($hasPoster, function($item) {
+        return array_key_exists('title', $item);
+    });
+
+    return view('home', [
+        'items' => [
+            'results' => $hasTitle
+        ]
+    ]);
+})->name('upcoming');
+
+Route::get('/search', function (Request $request) {
+
+    $query = $request->query('query');
+
+    $items = Http::get("https://api.themoviedb.org/3/search/multi?query=$query&api_key=" . config('services.tmdb.api_key'))->json();
+
+    $hasPoster = array_filter($items['results'], function($item) {
+        return array_key_exists('poster_path', $item);
+    });
+
+    $hasTitle = array_filter($hasPoster, function($item) {
+        return array_key_exists('title', $item);
+    });
+
+    return view('results', [
         'title' => 'Results',
         'items' => [
             'results' => $hasTitle
@@ -52,7 +99,7 @@ Route::get('/search', function (Request $request) {
 
 Route::get('/{id}', function ($id) {
 
-    $item = Http::get("https://api.themoviedb.org/3/movie/$id?api_key=" . config('services.tmdb.api_key') . '&language=en-US');
+    $item = Http::get("https://api.themoviedb.org/3/movie/$id?api_key=" . config('services.tmdb.api_key'));
 
     $key = (new Dom)->loadStr(Http::get("https://www.themoviedb.org/movie/$id")->body())
         ->find('.video.none .no_click.play_trailer')

@@ -8,7 +8,7 @@ COPY --chown=docker:docker . /var/www/html
 USER root
 
 RUN apt-get -y update && \
-    apt-get install python python3-pip sqlite3 supervisor -y && \
+    apt-get install python sqlite3 supervisor -y && \
     curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && \
     chmod a+rx /usr/local/bin/youtube-dl
 
@@ -19,6 +19,7 @@ COPY build/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 USER docker
 
 RUN composer install --quiet --optimize-autoloader --no-dev && \
+    touch database/database.sqlite || exit && \
     cp .env.example .env && \
     php artisan key:generate && \
     php artisan migrate --force

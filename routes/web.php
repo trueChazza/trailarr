@@ -1,11 +1,10 @@
 <?php
 
+use App\Jobs\DownloadVideo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use PHPHtmlParser\Dom;
-use YoutubeDl\Options;
-use YoutubeDl\YoutubeDl;
 
 /*
 |--------------------------------------------------------------------------
@@ -118,12 +117,9 @@ Route::post('/{id}', function (Request $request, $id) {
         'key' => 'required|string'
     ]);
 
-    (new YoutubeDl)->download(
-        Options::create()
-            ->downloadPath('/var/www/html/storage/app/videos')
-            ->url("https://www.youtube.com/watch?v=$request->key")
-            ->output('%(title)s.%(ext)s')
-    );
+    DownloadVideo::dispatch($request->key);
 
-    return view('success');
+    return redirect()->back()->with([
+        'success' => 'Success'
+    ]);
 });

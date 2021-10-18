@@ -19,7 +19,7 @@ COPY build/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 USER docker
 
 RUN composer install --quiet --optimize-autoloader --no-dev && \
-    cp -n .env.example .env && \
+    cp .env.example .env && \
     php artisan key:generate && \
     php artisan migrate --force
 

@@ -1,6 +1,10 @@
-## Introduction
+<p align="center"><img width="150" src="https://raw.githubusercontent.com/cgnetwork/trailarr/master/docs/logo.png" alt="Trailarr logo"></p>
 
-Trailarr is a self hosted download manager for movie and tv show trailers.
+<p align="center">
+    A self hosted download manager for movie and tv show trailers.
+</p>
+
+
 
 ## Features:
 

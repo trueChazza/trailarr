@@ -5,14 +5,15 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "norkunas/youtube-dl-php": "dev-master",
-        "paquettg/php-html-parser": "^3.1"
+        "paquettg/php-html-parser": "^3.1",
+        "romanzipp/laravel-queue-monitor": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

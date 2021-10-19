@@ -31,7 +31,7 @@ services:
   trailarr:
     image: cgnetwork/trailarr:latest
     ports:
-      - "80:80"
+      - "80:8080"
     volumes:
       - /path/to/trailers:/var/www/html/storage/app/videos
     environment:

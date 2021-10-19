@@ -12,6 +12,9 @@ RUN apt-get -y update && \
     curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl && \
     chmod a+rx /usr/local/bin/youtube-dl
 
+COPY build/apache/ports.conf /etc/apache2/ports.conf
+COPY build/apache/000-default.conf /etc/apache2/sites-enabled/000-default.conf
+
 COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/apache.conf /etc/supervisor/conf.d/apache.conf
 COPY build/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
@@ -37,5 +40,7 @@ FROM php_base
 COPY --from=node_dependencies --chown=docker:docker /var/www/html /var/www/html
 
 USER root
+
+EXPOSE 8080
 
 CMD ["/usr/bin/supervisord", "-c" , "/etc/supervisor/conf.d/supervisord.conf"]

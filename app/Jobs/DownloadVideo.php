@@ -36,7 +36,7 @@ class DownloadVideo implements ShouldQueue
     {
         (new YoutubeDl)->download(
             Options::create()
-                ->downloadPath('/var/www/html/storage/app/videos')
+                ->downloadPath('/trailers')
                 ->url("https://www.youtube.com/watch?v=$this->key")
                 ->output('%(title)s.%(ext)s')
         );

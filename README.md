@@ -11,16 +11,12 @@
     A self hosted download manager for movie and tv show trailers.
 </p>
 
-
-
 ## Features:
 
 * A beautiful, easy to use UI.
 * Easy setup, readily configured out-of-the box.
 
 ## Usage
-
-To get started, all that is required is a `TMDB_API_KEY` which can be obtained for free from the TMDB [developer website.](https://developers.themoviedb.org/3/getting-started/introduction)
 
 Docker compose example:
 
@@ -33,22 +29,14 @@ services:
     ports:
       - "80:8080"
     volumes:
-      - /path/to/trailers:/var/www/html/storage/app/videos
-    environment:
-      - TMDB_API_KEY=some-tmdb-api-key
+      - /path/to/trailers:/trailers
 ```
 
 ## Configuration
 
-A `TMDB_API_KEY` environment variable with a valid api key is required:
-
-```bash
-TMDB_API_KEY=some-tmdb-api-key
-```
-
 Trailers can be accessed on the host directory mounted to the container download directory:
 ```bash
-/path/to/trailers:/var/www/html/storage/app/videos
+/path/to/trailers:/trailers
 ```
 
 ## Contributing

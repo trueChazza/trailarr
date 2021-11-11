@@ -19,6 +19,8 @@ COPY build/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY build/apache.conf /etc/supervisor/conf.d/apache.conf
 COPY build/laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
 
+RUN mkdir /trailers
+
 USER docker
 
 RUN composer install --quiet --optimize-autoloader --no-dev && \

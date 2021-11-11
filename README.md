@@ -1,4 +1,4 @@
-<p align="center"><img width="150" src="https://raw.githubusercontent.com/cgnetwork/trailarr/master/docs/logo.png" alt="Trailarr logo"></p>
+![Preview](docs/preview.png)
 
 <p align="center">
     <a href="https://github.com/cgnetwork/trailarr/actions"><img src="https://img.shields.io/github/workflow/status/cgnetwork/trailarr/Master" alt="Build Status"></a>
@@ -7,12 +7,9 @@
     <a href="https://github.com/cgnetwork/trailarr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/cgnetwork/trailarr" alt="License"></a>
 </p>
 
-<p align="center">
-    A self hosted download manager for movie and tv show trailers.
-</p>
+## Features
 
-## Features:
-
+* Self hosted manager for movie and tv show trailers.
 * A beautiful, easy to use UI.
 * Easy setup, readily configured out-of-the box.
 

@@ -22,11 +22,13 @@ version: '3'
 
 services:
   trailarr:
+    container_name: trailarr
     image: cgnetwork/trailarr:latest
     ports:
       - "80:8080"
     volumes:
       - /path/to/trailers:/trailers
+    restart: unless-stopped
 ```
 
 ## Configuration

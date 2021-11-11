@@ -7,11 +7,16 @@
     <a href="https://github.com/cgnetwork/trailarr/blob/master/LICENSE"><img src="https://img.shields.io/github/license/cgnetwork/trailarr" alt="License"></a>
 </p>
 
-![Preview](docs/preview.png)
+<h2 align="center">trailarr</h2>
 
-* Self hosted manager for movie and tv show trailers.
-* A beautiful, easy to use UI.
-* Easy setup, readily configured out-of-the box.
+trailarr is an easy to use, self hosted manager for all your movie and tv show trailers. Easily search and download trailers with these great features:
+
+* A beautiful, easy to use interface.
+* Queued trailer downloads.
+* Readily configured out-of-the box.
+* Batteries included.
+
+![Preview](docs/preview.png)
 
 ## Usage
 

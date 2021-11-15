@@ -1,53 +1,38 @@
 @extends('app')
 
 @section('content')
-    <div class="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex">
-            <h1 class="flex-1 text-2xl font-bold text-gray-900">Movies</h1>
-        </div>
+<div class="relative overflow-hidden">
 
-        <div class="mt-3 sm:mt-2">
-
-            <div class="sm:block">
-                <div class="flex items-center border-b border-gray-200">
-
-                    <nav class="flex-1 -mb-px flex space-x-6 xl:space-x-8" aria-label="Tabs">
-
-                        <a href="/" class="{{ url()->current() === route('home') ? 'border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' }}">
-                            Trending
-                        </a>
-
-                        <a href="/now-playing" class="{{ url()->current() === route('now-playing') ? 'border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' }}">
-                            Now Playing
-                        </a>
-
-                        <a href="/upcoming" class="{{ url()->current() === route('upcoming') ? 'border-indigo-500 text-indigo-600 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm' }}">
-                            Upcoming
-                        </a>
-                    </nav>
-                </div>
+  <main>
+  <div class="relative">
+        <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gray-100"></div>
+        <div class="">
+          <div class="relative sm:overflow-hidden">
+            <div class="absolute inset-0">
+              <img class="h-full w-full object-cover" src="https://image.tmdb.org/t/p/original{{ $item['backdrop_path'] }}" alt="{{ $item['title'] }}">
+              <div class="absolute inset-0 bg-gray-700 mix-blend-multiply"></div>
             </div>
+            <div class="relative px-4 py-16 sm:px-6 sm:py-24 lg:py-32 lg:px-8">
+              <h1 class="text-left text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+                <span class="block text-white">{{ $item['title'] }}</span>
+              </h1>
+              <p class="mt-6 max-w-lg text-left text-xl text-white sm:max-w-2xl truncate">
+                {{ $item['overview'] }}
+              </p>
+              <div class="mt-10 max-w-sm sm:max-w-none sm:flex">
+                <div class="space-y-4 sm:space-y-0 sm:inline-grid sm:grid-cols-2 sm:gap-5">
+                  <a href="/movies/{{ $item['id'] }}" class="flex items-center justify-center px-4 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-500 hover:bg-indigo-700 sm:px-8">
+                    See Trailer
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <section class="mt-8 pb-16" aria-labelledby="gallery-heading">
-            <ul role="list" class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-6 xl:gap-x-8">
+    <!-- More main page content here... -->
+  </main>
+</div>
 
-                @foreach($items['results'] as $item)
-                    <li class="relative">
-                        <a href="/{{ $item['id'] }}" class="group">
-                            <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
-                                <img src="https://image.tmdb.org/t/p/original{{ $item['poster_path'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-center object-cover group-hover:opacity-75">
-                            </div>
-                            <h3 class="mt-4 text-sm text-gray-700">
-                                {{ $item['release_date'] }}
-                            </h3>
-                            <p class="mt-1 text-lg font-medium text-gray-900">
-                                {{ $item['title'] }}
-                            </p>
-                        </a>
-                    </li>
-                @endforeach
-            </ul>
-        </section>
-    </div>
 @endsection

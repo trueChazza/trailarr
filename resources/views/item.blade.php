@@ -6,7 +6,7 @@
 
             <iframe width="640" height="360" src="https://www.youtube.com/embed/{{ $key }}"></iframe>
 
-            <form method="POST" action="/{{ $item['id'] }}">
+            <form method="POST" action="/{{ $item['id'] }}/download">
                 @csrf
 
                 <input type='hidden' name='key' value='{{ $key }}'>

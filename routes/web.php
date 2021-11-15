@@ -1,10 +1,11 @@
 <?php
 
-use App\Jobs\DownloadVideo;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
+use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MovieController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ShowController;
 use Illuminate\Support\Facades\Route;
-use PHPHtmlParser\Dom;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,109 +18,10 @@ use PHPHtmlParser\Dom;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', [ HomeController::class, 'index' ]);
 
-    $items = Http::get('https://api.themoviedb.org/3/trending/all/day?api_key=' . config('services.tmdb.api_key'))->json();
+Route::get('/search', [ SearchController::class, 'index' ]);
 
-    $hasPoster = array_filter($items['results'], function($item) {
-        return array_key_exists('poster_path', $item);
-    });
-
-    $hasTitle = array_filter($hasPoster, function($item) {
-        return array_key_exists('title', $item);
-    });
-
-    return view('home', [
-        'items' => [
-            'results' => $hasTitle
-        ]
-    ]);
-})->name('home');
-
-Route::get('/now-playing', function () {
-
-    $items = Http::get('https://api.themoviedb.org/3/movie/now_playing?api_key=' . config('services.tmdb.api_key'))->json();
-
-    $hasPoster = array_filter($items['results'], function($item) {
-        return array_key_exists('poster_path', $item);
-    });
-
-    $hasTitle = array_filter($hasPoster, function($item) {
-        return array_key_exists('title', $item);
-    });
-
-    return view('home', [
-        'items' => [
-            'results' => $hasTitle
-        ]
-    ]);
-})->name('now-playing');
-
-Route::get('/upcoming', function () {
-
-    $items = Http::get('https://api.themoviedb.org/3/movie/upcoming?api_key=' . config('services.tmdb.api_key'));
-
-    $hasPoster = array_filter($items['results'], function($item) {
-        return array_key_exists('poster_path', $item);
-    });
-
-    $hasTitle = array_filter($hasPoster, function($item) {
-        return array_key_exists('title', $item);
-    });
-
-    return view('home', [
-        'items' => [
-            'results' => $hasTitle
-        ]
-    ]);
-})->name('upcoming');
-
-Route::get('/search', function (Request $request) {
-
-    $query = $request->query('query');
-
-    $items = Http::get("https://api.themoviedb.org/3/search/multi?query=$query&api_key=" . config('services.tmdb.api_key'))->json();
-
-    $hasPoster = array_filter($items['results'], function($item) {
-        return array_key_exists('poster_path', $item);
-    });
-
-    $hasTitle = array_filter($hasPoster, function($item) {
-        return array_key_exists('title', $item);
-    });
-
-    return view('results', [
-        'title' => 'Results',
-        'items' => [
-            'results' => $hasTitle
-        ]
-    ]);
-});
-
-Route::get('/{id}', function ($id) {
-
-    $item = Http::get("https://api.themoviedb.org/3/movie/$id?api_key=" . config('services.tmdb.api_key'));
-
-    $key = (new Dom)->loadStr(Http::get("https://www.themoviedb.org/movie/$id")->body())
-        ->find('.video.none .no_click.play_trailer')
-        ->offsetGet(0)
-        ->getAttribute('data-id');
-
-    return view('item', [
-        'item' => $item->json(),
-        'key' => $key
-    ]);
-});
-
-Route::post('/{id}', function (Request $request, $id) {
-
-    $request->validate([
-        'key' => 'required|string'
-    ]);
-
-    DownloadVideo::dispatch($request->key);
-
-    return redirect()->back()->with([
-        'success' => 'Success'
-    ]);
-});
+Route::resource('/movies', MovieController::class)->only([ 'index', 'show' ]);
+Route::resource('/shows', ShowController::class)->only([ 'index', 'show' ]);
+Route::post('/{id}/download', [ DownloadController::class, 'store' ]);

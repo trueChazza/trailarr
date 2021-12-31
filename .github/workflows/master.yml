@@ -23,6 +23,7 @@ jobs:
         run: vendor/bin/phpunit
 
   release:
+    needs: test
     name: Release
     runs-on: ubuntu-latest
     steps:

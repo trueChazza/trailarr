@@ -9,10 +9,10 @@
 
 <h2 align="center">trailarr</h2>
 
-trailarr is an easy to use, self hosted manager for all your movie and tv show trailers. Easily search and download trailers with these great features:
+`trailarr` is an easy to use, self hosted manager for all your movie and tv show trailers. Easily search and download trailers with these great features:
 
 * A beautiful, easy to use interface.
-* Queued trailer downloads.
+* Background trailer downloads.
 * Readily configured out-of-the box.
 * Batteries included.
 
@@ -32,7 +32,7 @@ services:
     ports:
       - "80:8080"
     volumes:
-      - /path/to/trailers:/trailers
+      - /path/to/download:/trailers
     restart: unless-stopped
 ```
 
@@ -40,13 +40,13 @@ services:
 
 Trailers can be accessed on the host directory mounted to the container download directory:
 ```bash
-/path/to/trailers:/trailers
+/path/to/download:/trailers
 ```
 
 ## Contributing
 
-Thank you for considering contributing to trailarr! We welcome all pull requests.
+Thank you for your contributions! Big or small - we welcome all!
 
 ## License
 
-trailarr is open-sourced software licensed under the [MIT license](LICENSE).
+`trailarr` is open-sourced software licensed under the [MIT license](LICENSE).

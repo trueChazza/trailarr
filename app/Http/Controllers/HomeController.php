@@ -13,15 +13,13 @@ class HomeController extends Controller
         $hasBackdrop = array_filter($items['results'], function($item) {
             return array_key_exists('backdrop_path', $item);
         });
-    
+
         $hasTitle = array_filter($hasBackdrop, function($item) {
             return array_key_exists('title', $item);
         });
 
-        $randomItem = array_rand($hasTitle, 1);
-    
         return view('home', [
-            'item' => $hasTitle[$randomItem]
+            'item' => empty($hasTitle) ? [] : $hasTitle[array_rand($hasTitle)]
         ]);
     }
 }

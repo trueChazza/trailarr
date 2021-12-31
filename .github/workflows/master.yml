@@ -19,8 +19,8 @@ jobs:
         run: cp -a .env.example .env
       - name: Generate key
         run: php artisan key:generate
-      - name: Execute tests (Unit and Feature tests) via PHPUnit
-        run: vendor/bin/phpunit
+      - name: Execute tests (Unit and Feature tests)
+        run: vendor/bin/pest
 
   release:
     needs: test

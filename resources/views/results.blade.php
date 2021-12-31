@@ -11,7 +11,7 @@
 
                 @foreach($items['results'] as $item)
                     <li class="relative">
-                        <a href="/{{ $item['id'] }}" class="group">
+                        <a href="/movies/{{ $item['id'] }}" class="group">
                             <div class="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
                                 <img src="https://image.tmdb.org/t/p/original{{ $item['poster_path'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-center object-cover group-hover:opacity-75">
                             </div>

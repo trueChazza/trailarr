@@ -40,7 +40,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build tag multi arch push
-        run: |
-          docker buildx build \
-            --tag cgnetwork/trailarr:multi-arch \
-            --platform linux/amd64,linux/arm64,linux/arm/v7 --push .
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          push: true
+          tags: cgnetwork/trailarr:multi-arch

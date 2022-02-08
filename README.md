@@ -1,3 +1,6 @@
+> Due to resource constraints, this project has been abandoned.
+> Please accept our apologies for any inconvenience.
+
 <p align="center"><img width="150" src="docs/logo-alt.png" alt="trailarr logo"></p>
 
 <p align="center">
